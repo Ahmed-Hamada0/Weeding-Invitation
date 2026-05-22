@@ -7,6 +7,11 @@ const landing = document.getElementById('landing');
 const invitation = document.getElementById('invitation');
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpSuccess = document.getElementById('rsvpSuccess');
+const copyInviteBtn = document.getElementById('copyInviteBtn');
+const whatsAppShareBtn = document.getElementById('whatsAppShareBtn');
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxClose = document.getElementById('lightboxClose');
 
 // ===== Music Control =====
 let isPlaying = false;
@@ -108,14 +113,25 @@ function updateCountdown() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds;
+    updateCountValue('days', days);
+    updateCountValue('hours', hours);
+    updateCountValue('minutes', minutes);
+    updateCountValue('seconds', seconds);
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+function updateCountValue(id, value) {
+    const el = document.getElementById(id);
+    const next = String(value);
+    if (el.textContent !== next) {
+        el.textContent = next;
+        el.classList.remove('changed');
+        void el.offsetWidth;
+        el.classList.add('changed');
+    }
+}
 
 // ===== RSVP Form =====
 rsvpForm.addEventListener('submit', (e) => {
@@ -141,10 +157,11 @@ function addWishToWall(name, message) {
     const wall = document.getElementById('wishesWall');
     const card = document.createElement('div');
     card.classList.add('wish-card');
-    card.innerHTML = `
-        <p>"${message}"</p>
-        <span>- ${name}</span>
-    `;
+    const messageElement = document.createElement('p');
+    messageElement.textContent = `"${message}"`;
+    const authorElement = document.createElement('span');
+    authorElement.textContent = `- ${name}`;
+    card.append(messageElement, authorElement);
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     wall.prepend(card);
@@ -201,9 +218,15 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            maybeCreateScrollConfetti(entry.target);
         }
     });
 }, observerOptions);
+
+// Observe sections
+document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+});
 
 // Observe timeline items
 document.querySelectorAll('.timeline-item').forEach(item => {
@@ -232,3 +255,49 @@ document.querySelectorAll('.detail-card').forEach(card => {
 document.querySelector('.scroll-indicator')?.addEventListener('click', () => {
     document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' });
 });
+
+// ===== Gallery Lightbox =====
+document.querySelectorAll('.gallery-item img').forEach(image => {
+    image.addEventListener('click', () => {
+        if (!lightbox || !lightboxImage) return;
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightbox.classList.remove('hidden');
+    });
+});
+
+lightboxClose?.addEventListener('click', () => lightbox?.classList.add('hidden'));
+lightbox?.addEventListener('click', (event) => {
+    if (event.target === lightbox) {
+        lightbox.classList.add('hidden');
+    }
+});
+
+// ===== Share Link =====
+copyInviteBtn?.addEventListener('click', async () => {
+    const url = window.location.href;
+    try {
+        await navigator.clipboard.writeText(url);
+        copyInviteBtn.innerHTML = '<i class="fas fa-check"></i> Link Copied';
+    } catch {
+        copyInviteBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Copy Failed';
+    }
+
+    setTimeout(() => {
+        copyInviteBtn.innerHTML = '<i class="fas fa-link"></i> Copy Invitation Link';
+    }, 1700);
+});
+
+if (whatsAppShareBtn) {
+    const names = document.querySelector('.couple-names')?.textContent?.replace(/\s+/g, ' ').trim() || 'our wedding';
+    const message = `You're invited to ${names}'s wedding celebration!`;
+    whatsAppShareBtn.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+}
+
+// ===== Confetti on Scroll =====
+function maybeCreateScrollConfetti(section) {
+    if (!section.classList.contains('celebrated') && section.dataset.confetti === 'true') {
+        section.classList.add('celebrated');
+        createCelebration();
+    }
+}
