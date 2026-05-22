@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed & Jana - Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Animation -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Music Control -->
+    <button class="music-btn" id="musicBtn" title="Play Music">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Landing / Envelope Section -->
+    <section class="landing" id="landing">
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <p class="envelope-text">You're Invited</p>
+                <button class="open-btn" id="openBtn">Open Invitation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Invitation -->
+    <main class="invitation hidden" id="invitation">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="overlay"></div>
+            <div class="hero-content">
+                <p class="save-the-date">Save The Date</p>
+                <h1 class="couple-names">
+                    <span class="name ahmed">Ahmed</span>
+                    <span class="ampersand">&</span>
+                    <span class="name jana">Jana</span>
+                </h1>
+                <p class="tagline">Are Getting Married</p>
+                <div class="scroll-indicator">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="petals" id="petals"></div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="section story" id="story">
+            <h2 class="section-title">Our Love Story</h2>
+            <div class="divider"><i class="fas fa-heart"></i></div>
+            <p class="story-text">
+                "I will never fall in love until I found you..."
+            </p>
+            <p class="story-description">
+                From the moment our paths crossed, we knew our lives would never be the same. 
+                What started as a beautiful friendship blossomed into an eternal love story. 
+                Today, we invite you to celebrate the beginning of our forever.
+            </p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-heart"></i></div>
+                    <div class="timeline-content">
+                        <h3>First Met</h3>
+                        <p>The day everything changed</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-ring"></i></div>
+                    <div class="timeline-content">
+                        <h3>The Proposal</h3>
+                        <p>She said YES!</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-gem"></i></div>
+                    <div class="timeline-content">
+                        <h3>The Wedding</h3>
+                        <p>Our forever begins</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details Section -->
+        <section class="section details" id="details">
+            <h2 class="section-title">Wedding Details</h2>
+            <div class="divider"><i class="fas fa-heart"></i></div>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Date</h3>
+                    <p>Friday, August 15, 2026</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Time</h3>
+                    <p>Ceremony: 5:00 PM</p>
+                    <p>Reception: 7:00 PM</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Venue</h3>
+                    <p>The Grand Palace Hall</p>
+                    <p>Cairo, Egypt</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Reception</h3>
+                    <p>Dinner & Dancing</p>
+                    <p>Dress Code: Formal</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="section countdown-section" id="countdown">
+            <h2 class="section-title">Counting Down To Our Big Day</h2>
+            <div class="divider"><i class="fas fa-heart"></i></div>
+            <div class="countdown" id="countdownTimer">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">0</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">0</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">0</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">0</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="section rsvp" id="rsvp">
+            <h2 class="section-title">RSVP</h2>
+            <div class="divider"><i class="fas fa-heart"></i></div>
+            <p class="rsvp-text">We would be honored by your presence</p>
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-group">
+                    <input type="text" id="guestName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="guestEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <select id="attendance" required>
+                        <option value="">Will you attend?</option>
+                        <option value="yes">Joyfully Accept</option>
+                        <option value="no">Regretfully Decline</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" id="guests" placeholder="Number of Guests" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Send your wishes to the couple..." rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send RSVP</button>
+            </form>
+            <div class="rsvp-success hidden" id="rsvpSuccess">
+                <i class="fas fa-check-circle"></i>
+                <p>Thank you! Your response has been recorded.</p>
+            </div>
+        </section>
+
+        <!-- Wishes Wall -->
+        <section class="section wishes" id="wishes">
+            <h2 class="section-title">Wishes & Blessings</h2>
+            <div class="divider"><i class="fas fa-heart"></i></div>
+            <div class="wishes-wall" id="wishesWall">
+                <div class="wish-card">
+                    <p>"Wishing you a lifetime of love and happiness!"</p>
+                    <span>- With Love</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <h2 class="couple-names-footer">Ahmed & Jana</h2>
+                <p class="footer-date">August 15, 2026</p>
+                <p class="footer-quote">"I will never fall in love until I found you"</p>
+                <div class="footer-hearts">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Audio -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

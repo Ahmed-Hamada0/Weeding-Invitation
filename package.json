@@ -1,0 +1,9 @@
+{
+  "name": "ahmed-jana-wedding-invitation",
+  "version": "1.0.0",
+  "description": "Wedding invitation for Ahmed & Jana",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'"
+  }
+}
