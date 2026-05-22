@@ -589,9 +589,9 @@ body::before {
 }
 
 @keyframes countBounce {
-    0% { transform: scale(1); }
-    45% { transform: scale(1.15); color: var(--blush); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); text-shadow: 0 0 20px rgba(212, 168, 83, 0.3); }
+    45% { transform: scale(1.15); text-shadow: 0 0 25px rgba(242, 194, 207, 0.75); }
+    100% { transform: scale(1); text-shadow: 0 0 20px rgba(212, 168, 83, 0.3); }
 }
 
 .countdown-label {

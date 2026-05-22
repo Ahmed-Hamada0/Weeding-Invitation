@@ -8,6 +8,7 @@ const invitation = document.getElementById('invitation');
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpSuccess = document.getElementById('rsvpSuccess');
 const copyInviteBtn = document.getElementById('copyInviteBtn');
+const whatsAppShareBtn = document.getElementById('whatsAppShareBtn');
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.getElementById('lightboxClose');
@@ -287,9 +288,15 @@ copyInviteBtn?.addEventListener('click', async () => {
     }, 1700);
 });
 
+if (whatsAppShareBtn) {
+    const names = document.querySelector('.couple-names')?.textContent?.replace(/\s+/g, ' ').trim() || 'our wedding';
+    const message = `You're invited to ${names}'s wedding celebration!`;
+    whatsAppShareBtn.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+}
+
 // ===== Confetti on Scroll =====
 function maybeCreateScrollConfetti(section) {
-    if (!section.classList.contains('celebrated') && (section.id === 'gallery' || section.id === 'countdown' || section.id === 'share')) {
+    if (!section.classList.contains('celebrated') && section.dataset.confetti === 'true') {
         section.classList.add('celebrated');
         createCelebration();
     }
